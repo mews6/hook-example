@@ -1,11 +1,10 @@
 import { useParams } from "react-router-dom";
-import { Mascotas } from './mascotas'
 
 const { useEffect, useState } = require("react");
 
 export default function Detail() {
- const params = useParams();
- const URL = "https://gist.githubusercontent.com/josejbocanegra/829a853c6c68880477697acd0490cecc/raw/99c31372b4d419a855e53f0e891246f313a71b20/mascotas.json";
+
+  const params = useParams();
  
  const [mascotas, setMascotas] = useState([]);
  useEffect(()=>{
@@ -15,13 +14,14 @@ export default function Detail() {
      })
  }, []);
  
- const mascota = mascotas.find((animal) => animal.id == params.mascotaId);
-
+ const mascota = {...mascotas[params.mascotaId-1]}
+ console.log(mascota)
+ 
  return(
-   <div>
-     <h1>{mascota.nombre}</h1>
-     <img src={mascota.foto} />
-     <h1>{mascota.raza}</h1>
-   </div>
+  <div>
+  <h1>{mascota.nombre}</h1>
+  <img src={mascota.foto} />
+  <h1>{mascota.raza}</h1>
+  </div>
  );
 }
